@@ -2,15 +2,40 @@ package DaoImp;
 
 import java.util.List;
 
-import Interfaces.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import Interfaces.IProducto;
 import model.TblProducto;
 
 public class TblProductoImp implements IProducto{
 
 	@Override
 	public void RegistrarProducto(TblProducto producto) {
-		// TODO Auto-generated method stub
+		// nos conectamos con la unidad de persistencia
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("ProyectoJPAMavenMarNoche");
+		EntityManager em=emf.createEntityManager();
+		try{
+			
 		
+		//Iniciamos Transaccion
+		em.getTransaction().begin();
+		
+		//Invocamos al metodo registrar
+		em.persist(producto);
+		
+		//vonfirmamos
+		em.getTransaction().commit();
+		
+		}catch(RuntimeException ex){
+			
+			ex.getMessage();
+		}finally{
+		
+		//cerramos
+		em.close();
+		}	
 	}
 
 	@Override

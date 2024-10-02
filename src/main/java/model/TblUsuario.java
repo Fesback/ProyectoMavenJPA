@@ -18,6 +18,8 @@ public class TblUsuario implements Serializable {
 
 	private String claveusuario;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idusuario;
 
 	
